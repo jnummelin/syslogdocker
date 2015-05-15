@@ -14,7 +14,7 @@
 
    allow syslogging from localhost over UDP (eg: port 1514):
 
-   `docker run  --name syslog -d -v /tmp/syslogdev:/dev -p 127.0.0.1:1514:514 syslog`
+   `docker run  --name syslog -d -v /tmp/syslogdev:/dev -p 127.0.0.1:1514:514/udp syslog`
 
 4. Start another container to send logs:
 
