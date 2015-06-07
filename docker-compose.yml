@@ -1,0 +1,12 @@
+syslog:
+    image: mbessler/syslogdocker:latest
+    restart: always
+    #log_driver: syslog
+    volumes:
+      - /tmp/syslogdev:/dev
+    ports:
+      - "127.0.0.1:1514:514/udp"
+      - "127.0.0.1:1514:514/tcp"
+    environment:
+      - LOGSENE_SYSLOG_HOST=logsene-receiver-syslog.sematext.com
+      - LOGSENE_APP_TOKEN=<your own token here>

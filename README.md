@@ -27,6 +27,15 @@
 
 5. See in the log message show up in the "tail" container.
 
+
+6. Logging to SemaText's Logsene service:
+
+   To log to remote [Logsene](http://sematext.com/logsene/) service, run with these environment variables:
+   * `LOGSENE_SYSLOG_HOST` - remote hostname, usually: `logsene-receiver-syslog.sematext.com`
+   * `LOGSENE_APP_TOKEN` - your Logsene application token
+
+   `docker run  --name syslog -d -v /tmp/syslogdev:/dev -e LOGSENE_SYSLOG_HOST=logsene-receiver-syslog.sematext.com -e LOGSENE_APP_TOKEN=<your token> -p 127.0.0.1:1514:514/udp syslog`
+
 ## Background
 
 For more information on this approach, see [Multiple Docker containers logging to a single syslog](http://jpetazzo.github.io/2014/08/24/syslog-docker/).
