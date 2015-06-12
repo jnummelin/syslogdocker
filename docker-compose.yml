@@ -7,6 +7,8 @@ syslog:
     ports:
       - "127.0.0.1:1514:514/udp"
       - "127.0.0.1:1514:514/tcp"
-    environment:
+    environment: # LOGSENE is optional, REMOTE_SYSLOG is also optional
       - LOGSENE_SYSLOG_HOST=logsene-receiver-syslog.sematext.com
       - LOGSENE_APP_TOKEN=<your own token here>
+      - REMOTE_SYSLOG_HOST=log.example.com
+      - REMOTE_SYSLOG_PORT=10514 # defaults to 514, logs via UDP
