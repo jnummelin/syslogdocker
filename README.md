@@ -45,9 +45,22 @@
 
    `docker run  --name syslog -d -v /tmp/syslogdev:/dev -e REMOTE_SYSLOG_HOST=syslog.example.com -e REMOTE_SYSLOG_PORT=5140 -e REMOTE_SYSLOG_PORT=udp -p 127.0.0.1:1514:514/udp syslog`
 
+8. With systemd-journald forwarding host journal to container:
+
+    * `READ_FROM_JOURNALD` - set to 1 if you want rsyslog to read from mapped socket (assumes the socket was created by "something" eg. a syslog.socket systemd unit)
+      Ensure that journald is configured for syslog forwarding, set the following in /etc/systemd/journal.conf.d/99-forward-to-sylog.conf
+    ```
+    [Journal]
+    ForwardToSyslog=yes
+    MaxLevelSyslog=debug
+    ```  
+
+   `docker run  --name syslog -d -v /tmp/syslogdev:/dev -e READ_FROM_JOURNALD=1 -v /run/systemd/journal/syslog:/run/systemd/journal/syslog -e REMOTE_SYSLOG_HOST=syslog.example.com -e REMOTE_SYSLOG_PORT=5140 -e REMOTE_SYSLOG_PORT=udp -p 127.0.0.1:1514:514/udp syslog`
 
 Note: this container is also available on Docker Hub: https://hub.docker.com/r/mbessler/syslogdocker/
 
 ## Background
 
 For more information on this approach, see [Multiple Docker containers logging to a single syslog](http://jpetazzo.github.io/2014/08/24/syslog-docker/).
+
+> Written with [StackEdit](https://stackedit.io/).

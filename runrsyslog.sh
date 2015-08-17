@@ -32,6 +32,17 @@ if [ "${LOG_TO_LOGSEME}" = "1" ] ; then
 fi
 
 
+if [ "${READ_FROM_JOURNALD}" = "1" ] ; then
+    # read from systemd-journald 
+    # requires the following in /etc/systemd/journal.conf.d/99-forward-to-syslog.conf
+    # [Journal]
+    # ForwardToSyslog=yes
+    if [ -d /run/systemd/journal ] ; then
+        # requires $ModLoad imuxsock, but is already default in /etc/rsyslog.conf
+        echo '$AddUnixListenSocket' > /etc/rsyslog.d/98-read-from-journal.conf
+    fi
+fi
+
 
 if [ "${LOG_TO_REMOTE_SYSLOG}" = "1" ] ; then
     TCP_PROTO="@@"
