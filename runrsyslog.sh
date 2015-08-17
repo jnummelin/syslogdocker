@@ -39,7 +39,7 @@ if [ "${READ_FROM_JOURNALD}" = "1" ] ; then
     # ForwardToSyslog=yes
     if [ -d /run/systemd/journal ] ; then
         # requires $ModLoad imuxsock, but is already default in /etc/rsyslog.conf
-        echo '$AddUnixListenSocket' > /etc/rsyslog.d/98-read-from-journal.conf
+        echo '$AddUnixListenSocket /run/systemd/journal/syslog' > /etc/rsyslog.d/98-read-from-journal.conf
     fi
 fi
 
