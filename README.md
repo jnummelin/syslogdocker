@@ -41,8 +41,12 @@
     To log to a remote syslog deamon (currently UDP), run with these environment variables:
     * `REMOTE_SYSLOG_HOST` - remote hostname, eg. syslog.example.com
     * `REMOTE_SYSLOG_PORT` - syslog port, defaults to 514
+    * `REMOTE_SYSLOG_PROTO` - protocol, udp or tcp, to talk to remote syslog server; defaults to 'udp'
 
-   `docker run  --name syslog -d -v /tmp/syslogdev:/dev -e REMOTE_SYSLOG_HOST=syslog.example.com -e REMOTE_SYSLOG_PORT=5140 -p 127.0.0.1:1514:514/udp syslog`
+   `docker run  --name syslog -d -v /tmp/syslogdev:/dev -e REMOTE_SYSLOG_HOST=syslog.example.com -e REMOTE_SYSLOG_PORT=5140 -e REMOTE_SYSLOG_PORT=udp -p 127.0.0.1:1514:514/udp syslog`
+
+
+Note: this container is also available on Docker Hub: https://hub.docker.com/r/mbessler/syslogdocker/
 
 ## Background
 

@@ -34,7 +34,13 @@ fi
 
 
 if [ "${LOG_TO_REMOTE_SYSLOG}" = "1" ] ; then
-    echo "*.*   @${REMOTE_SYSLOG_HOST}:${REMOTE_SYSLOG_PORT}" > /etc/rsyslog.d/99-forward-to-other-syslog-over-udp.conf
+    TCP_PROTO="@@"
+    UDP_PROTO="@"
+    SYSLOG_PROTO="${UDP_PROTO}"
+    if [ "${REMOTE_SYSLOG_PROTO}" = "tcp" ] ; then
+        SYSLOG_PROTO="${TCP_PROTO}"
+    fi
+    echo "*.*   ${SYSLOG_PROTO}${REMOTE_SYSLOG_HOST}:${REMOTE_SYSLOG_PORT}" > /etc/rsyslog.d/99-forward-to-other-syslog.conf
 fi
 
 rsyslogd -n

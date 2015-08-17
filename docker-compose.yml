@@ -11,4 +11,17 @@ syslog:
       - LOGSENE_SYSLOG_HOST=logsene-receiver-syslog.sematext.com
       - LOGSENE_APP_TOKEN=<your own token here>
       - REMOTE_SYSLOG_HOST=log.example.com
-      - REMOTE_SYSLOG_PORT=10514 # defaults to 514, logs via UDP
+      - REMOTE_SYSLOG_PORT=10514 # defaults to 514
+      - REMOTE_SYSLOG_PROTO=udp # defaults to UDP, valid values: 'udp' or 'tcp'
+    #volumes_from:
+    #  - syslogdata
+
+# if you want to use a data volume container for syslog /var/log/ please uncomment volumes_from: section above and below block
+## data volume container for syslog's /var/log dir
+#syslogdata:
+#    image: busybox
+#    restart: always
+#    command: tail -f /dev/null
+#    volumes:
+#      - /var/log
+
