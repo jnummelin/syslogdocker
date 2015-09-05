@@ -7,6 +7,8 @@ syslog:
     ports:
       - "127.0.0.1:1514:514/udp"
       - "127.0.0.1:1514:514/tcp"
+    #volumes_from:  # volumes_from not supported when using 'extends'
+    #  - syslogdata
     environment: # LOGSENE is optional, REMOTE_SYSLOG is also optional
       - LOGSENE_SYSLOG_HOST=logsene-receiver-syslog.sematext.com
       - LOGSENE_APP_TOKEN=<your own token here>
