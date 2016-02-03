@@ -10,7 +10,7 @@ RUN echo "\$ModLoad imudp" > /etc/rsyslog.d/99-enable-udp-input.conf && \
     rm -f /etc/rsyslog.d/50-default.conf && \
     sed -i /etc/rsyslog.conf -e '/^.ModLoad imklog/ s|^|#|' && \
     sed -i /etc/rsyslog.conf -e '/^.KLogPermitNonKernelFacility/ s|^|#|' && \
-    /bin/echo -e '#!/bin/sh\nrm -f /var/log/syslog\n' > /root/syslogclean.sh && \
+    /bin/echo -e '#!/bin/sh\nrm -f /var/log/syslog\n' > /root/syslogclean.sh && chmod a+x /root/syslogclean.sh && \
     :
 ADD runrsyslog.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/runrsyslog.sh
